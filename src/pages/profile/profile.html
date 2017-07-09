@@ -15,4 +15,30 @@
 
 <ion-content padding>
 
+  <ion-card class="adv-map" *ngIf="userProfile">
+    <div class="profile-picture">
+      <img src="../../assets/images/acm-logo.png">
+      <ion-fab right top>
+        <button ion-fab mini class="fab-map">
+          <ion-icon name='create'></ion-icon>
+        </button>
+      </ion-fab>
+    </div>
+    <ion-item>
+      <ion-icon color="subtle" large item-start name='person'></ion-icon>
+      <h2>Name</h2>
+      <h4>{{userProfile.name}}</h4>
+    </ion-item>
+    <ion-item>
+      <ion-icon color="subtle" large item-start name='phone-portrait'></ion-icon>
+      <h2>Phone Number</h2>
+      <h4>{{userProfile.mobileNumber}}</h4>
+    </ion-item>
+    <ion-item>
+      <ion-icon color="subtle" large item-start name='megaphone'></ion-icon>
+      <h2>Status</h2>
+      <p>{{userProfile.statusMessage}}</p>
+    </ion-item>
+  </ion-card>
+
 </ion-content>

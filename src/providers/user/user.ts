@@ -16,6 +16,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class UserProvider {
 
+  private currentLogedInUsername: string;
+
   constructor(
     public http: Http,
     private processHTTPMsgService: ProcessHttpmsgProvider
@@ -48,6 +50,19 @@ export class UserProvider {
     headers.append('Content-Type','application/json');
     let apiEndPoint = baseUrl + 'users/register';
     return this.http.post(apiEndPoint, newUser, {headers: headers})
+      .map(res => { return this.processHTTPMsgService.extractData(res); })
+      .catch(error => { return this.processHTTPMsgService.handleError(error); });
+  }
+
+  setCurrentLogedInUsername(currentLogedInUsername: string) {
+    this.currentLogedInUsername = currentLogedInUsername;
+  }
+
+  getUserProfile(): Observable<User> {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let apiEndPoint = baseUrl + 'users/' + this.currentLogedInUsername;
+    return this.http.get(apiEndPoint, {headers: headers})
       .map(res => { return this.processHTTPMsgService.extractData(res); })
       .catch(error => { return this.processHTTPMsgService.handleError(error); });
   }

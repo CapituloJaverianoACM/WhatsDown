@@ -2,7 +2,7 @@ export interface User {
   name: string;
   username: string;
   image: string;
-  status: string;
-  mobileNumber: number;
+  statusMessage: string;
+  mobileNumber: string;
   contacts: User[];
 }

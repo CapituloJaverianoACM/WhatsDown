@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user';
+import { User } from '../../shared/user';
 
 /**
  * Generated class for the ProfilePage page.
@@ -12,9 +14,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
-export class ProfilePage {
+export class ProfilePage implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userProfile: User;
+
+  constructor(
+    public navCtrl: NavController,
+    private userProvider: UserProvider,
+    public navParams: NavParams) {
+  }
+
+  ngOnInit() {
+    this.userProvider.getUserProfile().subscribe( (resp) => {
+      this.userProfile = resp;
+      let phonePrefix = this.userProfile.mobileNumber.substr(0,3) + " ";
+      let phoneSufix = this.userProfile.mobileNumber.substr(3,9);
+      this.userProfile.mobileNumber = phonePrefix + phoneSufix;
+      console.log("subscribe");
+      console.log(this.userProfile);
+    });
   }
 
   ionViewDidLoad() {

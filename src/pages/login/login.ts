@@ -73,6 +73,7 @@ export class LoginPage {
           subTitle: 'Login succesfull.',
           buttons: ['Dismiss']
         });
+        this.userProvider.setCurrentLogedInUsername(userCredentials.username);
         registerSuccessAlert.present();
         this.navCtrl.setRoot(TabsPage);
       }
