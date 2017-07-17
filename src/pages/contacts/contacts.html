@@ -6,13 +6,38 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (click)="onUpdateContactList()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Contacts</ion-title>
-  </ion-navbar>
-
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="onAddContact()">
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list *ngIf="contacts">
+    <ion-item-sliding *ngFor="let contact of contacts">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/images/acm-logo.png">
+        </ion-avatar>
+        <h2>{{contact.name}}</h2>
+        <p>{{contact.statusMessage}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="onDeleteContact(contact.username)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

@@ -62,6 +62,9 @@ export class LoginPage {
     registerErrorAlert.present();
   }
 
+  /**
+    * Sends the field's information to validate in the API.
+    */
   onSubmit() {
     let userCredentials = this.loginForm.value;
     this.userProvider.loginUser(userCredentials)

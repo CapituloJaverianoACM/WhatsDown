@@ -21,18 +21,16 @@ export class ProfilePage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private userProvider: UserProvider,
-    public navParams: NavParams) {
-  }
+    public navParams: NavParams) { }
 
   ngOnInit() {
-    this.userProvider.getUserProfile().subscribe( (resp) => {
-      this.userProfile = resp;
-      let phonePrefix = this.userProfile.mobileNumber.substr(0,3) + " ";
-      let phoneSufix = this.userProfile.mobileNumber.substr(3,9);
-      this.userProfile.mobileNumber = phonePrefix + phoneSufix;
-      console.log("subscribe");
-      console.log(this.userProfile);
-    });
+    this.userProvider.getUserProfile()
+      .subscribe( (resp) => {
+        this.userProfile = resp;
+        let phonePrefix = this.userProfile.mobileNumber.substr(0,3) + " ";
+        let phoneSufix = this.userProfile.mobileNumber.substr(3,9);
+        this.userProfile.mobileNumber = phonePrefix + phoneSufix;
+      });
   }
 
   ionViewDidLoad() {

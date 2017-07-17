@@ -14,5 +14,13 @@
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let message of chats">{{message}}</ion-item>
+  </ion-list>
 
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="chatInput" placeholder="Enter message"></ion-input>
+  </ion-item>
+
+  <button ion-button block (click)="sendMessage(chatInput)">Send</button>
 </ion-content>
