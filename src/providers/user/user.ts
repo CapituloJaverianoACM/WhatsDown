@@ -30,13 +30,13 @@ export class UserProvider {
     * @return {Observable<Response>} API's response.
     */
 
-    loginUser(userCredentials: User): Observable<Response> {
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      let apiEndPoint = baseUrl + 'users/login';
-      return this.http.post(apiEndPoint, userCredentials, {headers: headers})
-        .map(res => { return this.processHTTPMsgService.extractData(res); })
-        .catch(error => { return this.processHTTPMsgService.handleError(error)});
+  loginUser(userCredentials: User): Observable<Response> {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let apiEndPoint = baseUrl + 'users/login';
+    return this.http.post(apiEndPoint, userCredentials, {headers: headers})
+      .map(res => { return this.processHTTPMsgService.extractData(res); })
+      .catch(error => { return this.processHTTPMsgService.handleError(error) });
     }
 
   /**

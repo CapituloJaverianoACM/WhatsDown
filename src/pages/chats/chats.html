@@ -6,21 +6,34 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (click)="onUpdateChatList()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Chats</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let message of chats">{{message}}</ion-item>
+  <ion-list *ngIf="usersChats">
+    <ion-item-sliding *ngFor="let chat of usersChats">
+      <ion-item (click)="onChatSelected(chat)">
+        <ion-avatar item-start>
+          <img src="../../assets/images/acm-logo.png">
+        </ion-avatar>
+        <h2>{{getScreenUsername(chat)}}</h2>
+        <p>{{chat._id}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="onDeleteChat(chat._id)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
-
-  <ion-item>
-    <ion-input type="text" [(ngModel)]="chatInput" placeholder="Enter message"></ion-input>
-  </ion-item>
-
-  <button ion-button block (click)="sendMessage(chatInput)">Send</button>
 </ion-content>

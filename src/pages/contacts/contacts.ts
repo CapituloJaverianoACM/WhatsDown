@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
+import { ChatProvider } from '../../providers/chat/chat';
+import { ConversationPage } from '../../pages/conversation/conversation';
 import { User } from '../../shared/user';
 import { Response } from '@angular/http';
 
@@ -26,6 +28,7 @@ export class ContactsPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private userProvider: UserProvider,
+    private chatProvider: ChatProvider,
     public navParams: NavParams,
     private alertCtrl: AlertController) { }
 
@@ -125,6 +128,23 @@ export class ContactsPage implements OnInit {
         this.onUpdateContactList();
       },
       errmess => this.responseErrorHandler(errmess) );
+  }
+
+  /**
+    * Starts a new conversation with the selected contact
+    * @param {User} contactToStartChat contact to start chat.
+    */
+  onSelectContact(contactToStartChat: User) {
+    let newChatRequest = {
+      host: this.userProvider.getCurrentLogedInUsername(),
+      recipient: contactToStartChat.username,
+    };
+    this.chatProvider.startChat(newChatRequest)
+      .subscribe( (createdChat) => {
+        this.navCtrl.push(ConversationPage, {chatRoom: createdChat});
+      },
+      errmess => this.responseErrorHandler(errmess) );
+
   }
 
 }

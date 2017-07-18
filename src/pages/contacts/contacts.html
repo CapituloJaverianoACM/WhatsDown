@@ -25,7 +25,7 @@
 <ion-content padding>
   <ion-list *ngIf="contacts">
     <ion-item-sliding *ngFor="let contact of contacts">
-      <ion-item>
+      <ion-item (click)="onSelectContact(contact)">
         <ion-avatar item-start>
           <img src="../../assets/images/acm-logo.png">
         </ion-avatar>
